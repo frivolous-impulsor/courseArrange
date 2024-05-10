@@ -4,10 +4,37 @@ from bs4 import BeautifulSoup
 import json
 import mechanicalsoup
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+import time
 
 
 def searchCourse(keyWord: str):     #
+    url = "https://kurser.ku.dk/#q=&education=&programme=&volume=&departments=&faculty=FACULTY_0005&studyBlockId=&teachingLanguage=en-GB&period=&schedules=&studyId=&openUniversityInternational=1&searched=1"
     browser = webdriver.Chrome()
+    browser.get(url)
+    time.sleep(5)
+    cookieBlock = browser.find_element(By.CLASS_NAME, "ccc-buttons")
+    cookieButton = cookieBlock.find_element(By.CLASS_NAME, "btn")
+    cookieButton.click()
+    time.sleep(1)
+
+    inputBox = browser.find_element(By.ID, 'q')
+    inputBox.send_keys(keyWord)
+
+    submitButton = browser.find_element(By.ID, 'searchall')
+    #submitButton = WebDriverWait(browser, 2).until(
+    #        EC.visibility_of_element_located((By.ID, 'searchall')))
+    #submitButton.click()
+    inputBox.send_keys(Keys.ENTER)
+    time.sleep(10)
+    return browser.current_url
+
+searchCourse("quantum")
+
 
 def fetchCourse(url: str):  #find (title, content, #block) from url at KU course website
     courseInstance = urlopen(url)
