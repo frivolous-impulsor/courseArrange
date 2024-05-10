@@ -1,0 +1,18 @@
+[
+ {
+  "title": "test 1",
+  "code": "code 1",
+  "timeSlots": [
+   1
+  ],
+  "desciption": null
+ },
+ {
+  "title": "test 2",
+  "code": "test 1F03",
+  "timeSlots": [
+   4
+  ],
+  "desciption": null
+ }
+]
