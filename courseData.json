@@ -1,18 +1,12 @@
 [
  {
-  "title": "test 1",
-  "code": "code 1",
-  "timeSlots": [
-   1
-  ],
-  "desciption": null
+  "title": "NDAK22000U\u00a0Machine Learning A\n(MLA)",
+  "content": "The course introduces basic theory and algorithms of machine\nlearning. The course covers the following tentative list of\ntopics:Supervised learning setting\nClassificationRegressionUnsupervised learning settingConcentration of measure inequalities\nMarkov'sChebyshev'sHoeffding'sAnalysis of generalization in classification\nValidation and cross-validationGeneralisation bound for a single hypothesisGeneralisation bound for a finite hypothesis classOccam's razor - generalisation bound for a countably\ninfinite hypothesis classAlgorithms\nK-Nearest NeighborsPerceptronLogistic RegressionLinear RegressionFeature transformations and classification/regression in\ntransformed feature spacesVarious forms of regularisation\nRegularization termsDimensionality reductionRandom Forests and Decision TreesNeural Networks and introduction to Deep LearningPrincipal Component Analysis (PCA)ClusteringAssumptions behind the algorithms taught in the course, their\nimplications, and common pitfalls\nOverfitting\nInternal overfitting within algorithms due to overly complex\nhypothesis spacesExtrenal overfitting outside algorithms due to application of\nan excessive number of algorithms to a datasetThe i.i.d. assumption\nThe i.i.d. assumption is behind everything taught in the\ncourseConsequences of violation of the i.i.d. assumption\nSpecial case: sampling biasFailure of generalisation guaranteesImplications of the i.i.d. assumption\nBiases in the training data propagate into\npredictionsCorrelation \u2260 Causality\nThe course only studies statistical correlations / dependencies\nin the data. Causal inference is not covered in the\ncourse.\u00a0WARNING: The course assumes solid math and\nprogramming skills. Please, check the \"Recommended Academic\nQualifications\" box below and the self-assessment assignment\nat\u00a0\nhttps://sites.google.com/diku.edu/machine-learning-courses/ml-a.\nIt is not advised taking the course if you do not meet the\nacademic qualifications.\u00a0Physical & Online: This is a physical\ncourse, but we support remote participation.",
+  "block": "1"
  },
  {
-  "title": "test 2",
-  "code": "test 1F03",
-  "timeSlots": [
-   4
-  ],
-  "desciption": null
+  "title": "NDAA09023U\u00a0Advanced Algorithms and\nData Structures (AADS)",
+  "content": "Algorithms is about finding scalable solutions to computational\nproblems, and the reliance is only increasing as we enter the world\nof Big Data. We want algorithms that solve problems efficiently\nrelative to the input size. Exponential time is hopeless. We\ngenerally want polynomial time, and for large problems we need\nlinear time. Sometimes we employ data structures that represent the\ninput so that queries about it can be answered very efficiently. In\nthis mandatory course, we will study the list of algorithmic topics\nbelow. Some of these topics are covered in more depth in more\nspecialised elective courses.",
+  "block": "2"
  }
 ]
