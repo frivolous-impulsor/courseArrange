@@ -2,7 +2,6 @@ from urllib.request import urlopen
 import re
 from bs4 import BeautifulSoup
 import json
-import mechanicalsoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains 
@@ -12,28 +11,35 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 
-def searchCourse(keyWord: str):     #
+def searchCourse(keyWord: str, k=3):     #
     url = "https://kurser.ku.dk/#q=&education=&programme=&volume=&departments=&faculty=FACULTY_0005&studyBlockId=&teachingLanguage=en-GB&period=&schedules=&studyId=&openUniversityInternational=1&searched=1"
     browser = webdriver.Chrome()
     browser.get(url)
-    time.sleep(5)
+    browser.fullscreen_window()
+    time.sleep(2)
     cookieBlock = browser.find_element(By.CLASS_NAME, "ccc-buttons")
     cookieButton = cookieBlock.find_element(By.CLASS_NAME, "btn")
     cookieButton.click()
-    time.sleep(1)
 
     inputBox = browser.find_element(By.ID, 'q')
     inputBox.send_keys(keyWord)
 
-    submitButton = browser.find_element(By.ID, 'searchall')
     #submitButton = WebDriverWait(browser, 2).until(
     #        EC.visibility_of_element_located((By.ID, 'searchall')))
     #submitButton.click()
-    inputBox.send_keys(Keys.ENTER)
-    time.sleep(10)
-    return browser.current_url
 
-searchCourse("quantum")
+    inputBox.send_keys(Keys.ENTER)
+    time.sleep(7)
+    resultsHTML = browser.page_source
+    soup = BeautifulSoup(resultsHTML, "html.parser")
+    resultTable = soup.find("tbody")
+    rootUrl = "https://kurser.ku.dk/"
+    urlList = [a['href']  for a in resultTable.find_all('a', href=True)]
+    urlList = urlList[:min(len(urlList), k)]
+    urlList = list(map((lambda url:rootUrl + url), urlList))
+
+    return urlList
+
 
 
 def fetchCourse(url: str):  #find (title, content, #block) from url at KU course website
@@ -60,15 +66,12 @@ def fetchCourse(url: str):  #find (title, content, #block) from url at KU course
     courseInfo['block'] = block
     return courseInfo
 
-""" testUrl = "https://kurser.ku.dk/course/ndak22000u/2023-2024"
+def test(word):
+    urls = searchCourse(word)
+    resultDicts = []
+    for url in urls:
+        resultDicts.append(fetchCourse(url))
+    with open("courseData.json", 'w') as courseDataFile:
+        json.dump(resultDicts, courseDataFile, indent=1)
 
-testDict = fetchCourse(testUrl)
-
-testUrl2 = "https://kurser.ku.dk/course/ndaa09023u/2024-2025"
-testDict2 = fetchCourse(testUrl2)
-
-with open('courseData.json', 'w') as courseDataFile:
-    json.dump([testDict, testDict2], courseDataFile, indent=1) """
-
-
- 
+test("quantum")
